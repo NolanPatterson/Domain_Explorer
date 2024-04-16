@@ -36,10 +36,9 @@ def domain_resolver(domain):
 # the requests module get() function to query the Shodan API about that IP. If
 # the API request can be successfully completed, return the results of the
 # query as JSON. Otherwise, return None.
-def shodan_query(ip_address):
+def query_shodan(ip_address):
     try:
-        response = requests.get(f'https://internetdb.shodan.io/{ip_address}',
-                                timeout=1.0)
+        response = requests.get(f'https://internetdb.shodan.io/{ip_address}')
         response.raise_for_status()
     except requests.exceptions.RequestException:
         return None
@@ -60,12 +59,16 @@ def main():
     ip_address = domain_resolver(args.domain)
     if ip_address:
         print(f'IP address: {ip_address}')
-        data = shodan_query(ip_address)
+        data = query_shodan(ip_address)
         if data:
-            print(f'CPEs: {data["cpe"]}')
-            print(f'Hostnames: {data["hostnames"]}')
+            print('CPEs:')
+            for cpes in data['cpes']:
+                print(f'  {cpes}')
+            print('Hostnames:')
+            for hostname in data['hostnames']:
+                print(f'  {hostname}')
         else:
-            print('Error: Unable to obtain data from Shodan API')
+            print('Error: Unable to obtain data')
     else:
         print('Error: Unable to resolve domain')
 
