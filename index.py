@@ -61,10 +61,12 @@ def main():
         print(f'IP address: {ip_address}')
         data = query_shodan(ip_address)
         if data:
-            print('CPEs:')
+            print(f'There are {len(data["cpes"])} CPEs for domain\
+ {args.domain}')
             for cpes in data['cpes']:
                 print(f'  {cpes}')
-            print('Hostnames:')
+            print(f'There are {len(data["hostnames"])} Hostnames for domain\
+ {args.domain}')
             for hostname in data['hostnames']:
                 print(f'  {hostname}')
         else:
