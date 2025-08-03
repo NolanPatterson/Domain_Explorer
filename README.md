@@ -61,6 +61,4 @@ The tool gracefully handles:
 - Network connectivity issues
 - API failures
 
-## License
 
-[Add your preferred license here]
