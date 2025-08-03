@@ -61,4 +61,7 @@ The tool gracefully handles:
 - Network connectivity issues
 - API failures
 
+## Disclaimer
+This tool is intended for educational and authorized security testing purposes only. 
+Only use this tool on domains you own or have explicit permission to analyze.
 
